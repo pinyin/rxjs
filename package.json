@@ -1,0 +1,40 @@
+{
+  "name": "@pinyin/rxjs",
+  "version": "0.0.1",
+  "description": "rxjs helpers",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "rm -rf dist && npx tsc",
+    "test": "npx jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pinyin/rxjs.git"
+  },
+  "keywords": [
+    "rxjs"
+  ],
+  "author": "Bo Bao <bob432091@gmail.com> (https://github.com/pinyin)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pinyin/rxjs/issues"
+  },
+  "homepage": "https://github.com/pinyin/rxjs#readme",
+  "devDependencies": {
+    "typescript": "^2.8.3"
+  },
+  "peerDependencies": {
+    "rxjs": "^6.1.0"
+  },
+  "dependencies": {
+    "@pinyin/maybe": "^0.0.5",
+    "@pinyin/react": "^0.0.7",
+    "@pinyin/types": "^0.0.3",
+    "tslib": "^1.9.0"
+  }
+}
