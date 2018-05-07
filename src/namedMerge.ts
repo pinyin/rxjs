@@ -1,3 +1,4 @@
+import {Discriminated} from '@pinyin/types'
 import {Observable} from 'rxjs/internal/Observable'
 import {merge} from 'rxjs/internal/observable/merge'
 import {map} from 'rxjs/operators'
@@ -8,17 +9,10 @@ export function namedMerge<T extends object>(observables: Observables<T>): Obser
     const obsArray: Array<Observable<Discriminated<T>>> =
         keys.map(key =>
             observables[key].pipe(
-                map(value => ({type: key, value} as Discriminated<T>))
+                map(value => (Object.assign({type: key}, value) as Discriminated<T>))
             )
         )
 
     return merge(...obsArray)
 }
 
-// TODO this belongs to @pinyin/type
-export type Discriminated<Shape, Key extends keyof Shape = keyof Shape> = {
-    [K in Key]: {
-        type: K
-        value: Shape[K]
-    }
-}[Key]
