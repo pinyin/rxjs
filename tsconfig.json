@@ -6,6 +6,7 @@
     "esModuleInterop": true,
     "inlineSourceMap": true,
     "declaration": true,
+    "declarationMap": true,
     "strict": true,
     "declarationDir": "dist",
     "importHelpers": true,
