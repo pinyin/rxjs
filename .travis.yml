@@ -7,3 +7,4 @@ deploy:
   on:
     tags: true
     repo: pinyin/rxjs
+    all_branches: true
