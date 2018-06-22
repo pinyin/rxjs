@@ -1,5 +1,5 @@
 import {ShapeOf} from '@pinyin/types'
-import {Subject} from 'rxjs/internal/Subject'
+import {Subject} from 'rxjs'
 import {Subjects} from './Subjects'
 
 export function createSubjects<T extends object>(names: ShapeOf<T>): Subjects<T> {

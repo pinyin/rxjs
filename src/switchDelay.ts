@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs/internal/Observable'
+import {Observable} from 'rxjs'
 import {mapTo, switchMap, take} from 'rxjs/operators'
 import {Pipe} from './Pipe'
 import {Pulse} from './Pulse'

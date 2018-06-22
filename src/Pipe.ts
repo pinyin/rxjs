@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs/internal/Observable'
+import {Observable} from 'rxjs'
 
 export type Pipe<A, B=A> = (source: Observable<A>) => Observable<B>
 

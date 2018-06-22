@@ -1,5 +1,4 @@
-import {Observable} from 'rxjs/internal/Observable'
-import {EMPTY} from 'rxjs/internal/observable/empty'
+import {EMPTY, Observable} from 'rxjs'
 import {withLatestFrom} from 'rxjs/operators'
 import {Observables} from './Observables'
 

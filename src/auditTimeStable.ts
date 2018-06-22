@@ -1,6 +1,5 @@
 import {ms} from '@pinyin/types'
-import {Observable} from 'rxjs/internal/Observable'
-import {timer} from 'rxjs/internal/observable/timer'
+import {Observable, timer} from 'rxjs'
 import {distinctUntilChanged, map, merge, scan, switchMap, timestamp, withLatestFrom} from 'rxjs/operators'
 import {Pipe} from './Pipe'
 

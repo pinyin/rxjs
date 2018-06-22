@@ -1,5 +1,5 @@
 import {ShapeOf} from '@pinyin/types';
-import {Observable} from 'rxjs/internal/Observable'
+import {Observable} from 'rxjs'
 import {map} from 'rxjs/operators'
 import {Observables} from './Observables'
 
