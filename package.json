@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/pinyin/rxjs#readme",
   "devDependencies": {
-    "@types/jest": "^23.1.0",
+    "@types/jest": "^23.1.1",
+    "babel-polyfill": "^6.26.0",
     "jest": "^23.1.0",
     "rxjs": "^6.2.1",
     "ts-jest": "^22.4.6",
@@ -41,13 +42,11 @@
     "@pinyin/react": "^0.0.15",
     "@pinyin/types": "^0.0.26",
     "rxjs": "^6.2.1",
-    "tslib": "^1.9.0"
+    "tslib": "^1.9.3"
   },
   "jest": {
     "roots": [
-      "src",
-      "lib",
-      "vendor"
+      "src"
     ],
     "transform": {
       "^.+\\.(t|j)sx?$": "ts-jest"
@@ -62,5 +61,10 @@
       "node"
     ],
     "verbose": true
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   }
 }
