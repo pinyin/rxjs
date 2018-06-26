@@ -61,10 +61,5 @@
       "node"
     ],
     "verbose": true
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
   }
 }
