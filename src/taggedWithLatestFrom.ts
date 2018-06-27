@@ -2,7 +2,7 @@ import {EMPTY, Observable} from 'rxjs'
 import {withLatestFrom} from 'rxjs/operators'
 import {Observables} from './Observables'
 
-export function namedWithLatestFrom<T extends object>(origin: Observables<T>): Observable<T> {
+export function taggedWithLatestFrom<T extends object>(origin: Observables<T>): Observable<T> {
     const keys = Object.keys(origin) as Array<keyof T>
     return keys
         .reduce(

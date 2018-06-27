@@ -3,7 +3,7 @@ import {combineLatest} from 'rxjs/internal/observable/combineLatest'
 import {map} from 'rxjs/operators'
 import {Observables} from './Observables'
 
-export function namedCombineLatest<T extends object>(observables: Observables<T>): Observable<T> {
+export function taggedCombineLatest<T extends object>(observables: Observables<T>): Observable<T> {
     const keys = Object.keys(observables) as Array<keyof T>
     const obs = keys.map(key => observables[key])
 
