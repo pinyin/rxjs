@@ -21,7 +21,7 @@ describe(`${fromReactiveIterator.name}`, () => {
         expect(finished).toEqual(1)
     })
 
-    it(`should terminate unfinished observable when subscribed`, async () => {
+    it(`should terminate unfinished observable when unsubscribed`, async () => {
         const result = fromReactiveIterator(generator()).pipe(takeUntil(timer(350)), toArray()).toPromise()
         expect(await result).toEqual([1, 2, 3, 4])
         expect(finished).toEqual(1)

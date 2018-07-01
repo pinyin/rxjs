@@ -22,15 +22,15 @@ export function fromReactiveIterator<T extends Exclude<something, Observable<any
             try {
                 for (let next = iterator.next(); !subscriber.closed && !next.done;) {
                     if (isObservable<any>(next.value)) {
+                        let value: any
                         try {
-                            const value = await next.value.pipe(takeUntil(closeSignal)).toPromise()
-                            next = iterator.next(value)
+                            value = await next.value.pipe(takeUntil(closeSignal)).toPromise()
                         } catch (e) {
                             if (existing(iterator.throw)) {
                                 iterator.throw(e)
                             }
-                            next = iterator.next()
                         }
+                        next = iterator.next(value)
                     } else {
                         subscriber.next(next.value as T) // TODO why is type cast necessary?
                         next = iterator.next()
