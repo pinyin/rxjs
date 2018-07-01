@@ -1,7 +1,8 @@
 import {existing} from '@pinyin/maybe'
-import {something} from '@pinyin/types'
+import {nothing, something} from '@pinyin/types'
 import {isObservable, Observable, Subject, Subscriber, Subscription, TeardownLogic} from 'rxjs'
 import {takeUntil} from 'rxjs/operators'
+import {IteratorTerminated} from './IteratorTerminated'
 import {Pulse} from './Pulse';
 
 export function fromReactiveIterator<T extends Exclude<something, Observable<any>>>(
@@ -11,18 +12,22 @@ export function fromReactiveIterator<T extends Exclude<something, Observable<any
         const subscription = new Subscription()
         const closeSignal = new Subject()
 
-        const closeIterator = closeSignal.subscribe(() => {
-            if (existing(iterator.return)) {
-                iterator.return()
+        let completed = false
+        const closeIteratorOnUnsubscribe = closeSignal.subscribe(() => {
+            if (!completed) {
+                if (existing(iterator.throw)) {
+                    iterator.throw(IteratorTerminated)
+                }
             }
         })
-        subscription.add(closeIterator)
+        subscription.add(closeIteratorOnUnsubscribe)
 
         async function forwardValues(): Promise<void> {
             try {
-                for (let next = iterator.next(); !subscriber.closed && !next.done;) {
+                for (let next = iterator.next();
+                     !subscriber.closed && !next.done;) {
+                    let value: any = nothing
                     if (isObservable<any>(next.value)) {
-                        let value: any
                         try {
                             value = await next.value.pipe(takeUntil(closeSignal)).toPromise()
                         } catch (e) {
@@ -30,12 +35,12 @@ export function fromReactiveIterator<T extends Exclude<something, Observable<any
                                 iterator.throw(e)
                             }
                         }
-                        next = iterator.next(value)
                     } else {
                         subscriber.next(next.value as T) // TODO why is type cast necessary?
-                        next = iterator.next()
                     }
+                    next = iterator.next(value)
                 }
+                completed = true
                 subscriber.complete()
             } catch (e) {
                 subscriber.error(e)
@@ -51,8 +56,4 @@ export function fromReactiveIterator<T extends Exclude<something, Observable<any
     })
 }
 
-export class Closed extends Error {
-    constructor() {
-        super(`Reactive iterator closed.`)
-    }
-}
+
