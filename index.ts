@@ -1,6 +1,6 @@
 export {attach} from './src/attach'
 export {deduplicate} from './src/deduplicate'
-export {fromAsyncIterable} from './src/fromAsyncIterable'
+export {fromAsyncIterator} from './src/fromAsyncIterator'
 export {logValue} from './src/logValue'
 export {nextValue} from './src/nextValue'
 export {Observables} from './src/Observables'

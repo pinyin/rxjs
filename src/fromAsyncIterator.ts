@@ -1,10 +1,8 @@
 import {Observable, Subscriber, Unsubscribable} from 'rxjs'
 
-export function fromAsyncIterable<T>(iterable: AsyncIterable<T>): Observable<T> {
+export function fromAsyncIterator<T>(iterator: AsyncIterator<T>): Observable<T> {
     return Observable.create((subscriber: Subscriber<T>): Unsubscribable => {
-        const iterator = iterable[Symbol.asyncIterator]()
-
-        ;(async (): Promise<void> => { // best place for a semicolon ever ...
+        async function forwardValues(): Promise<void> {
             try {
                 do {
                     const next = await iterator.next()
@@ -17,7 +15,9 @@ export function fromAsyncIterable<T>(iterable: AsyncIterable<T>): Observable<T> 
             } catch (e) {
                 subscriber.error(e)
             }
-        })()
+        }
+
+        forwardValues()
 
         return {
             unsubscribe: () => {} // FIXME memory leak?
