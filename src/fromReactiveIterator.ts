@@ -3,7 +3,7 @@ import {nothing, something} from '@pinyin/types'
 import {isObservable, Observable, Subject, Subscriber, Subscription, TeardownLogic} from 'rxjs'
 import {takeUntil} from 'rxjs/operators'
 import {IteratorTerminated} from './IteratorTerminated'
-import {Pulse} from './Pulse';
+import {Pulse} from './Pulse'
 
 export function fromReactiveIterator<T extends Exclude<something, Observable<any>>>(
     iterator: Iterator<T | Observable<any>>
@@ -36,6 +36,7 @@ export function fromReactiveIterator<T extends Exclude<something, Observable<any
                             }
                         }
                     } else {
+                        value = next
                         subscriber.next(next.value as T) // TODO why is type cast necessary?
                     }
                     next = iterator.next(value)
