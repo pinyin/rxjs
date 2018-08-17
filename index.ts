@@ -2,6 +2,9 @@ export {Pulse} from './src/Pulse'
 export {Subjects} from './src/Subjects'
 export {Observables} from './src/Observables'
 
+export {toObservables} from './src/toObservables'
+export {createEventHandlers} from './src/createEventHandlers'
+
 export {fromAsyncIterator} from './src/fromAsyncIterator'
 export {fromReactiveIterator} from './src/fromReactiveIterator'
 
@@ -20,4 +23,3 @@ export {withCache} from './src/withCache'
 export {SubscriptionLikeValue} from './src/SubscriptionLikeValue'
 export {subscribeToValue} from './src/subscribeToValue'
 
-export {toObservables} from './src/toObservables'
